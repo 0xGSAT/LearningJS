@@ -160,7 +160,7 @@ console.log(price);
 ```
 <img src="../numberPrecision.png" alt="Number Precision" width="400px" height="50px">
 
-So, as you can see in the above example, the expected output is 2.4 but the actual output is 2.4000000000000004. This is because JS uses 64-bit floating point numbers to represent numbers. And 64-bit floating point numbers are not precise. So, to avoid this issue we can use `toFixed([precision_number])` method. Example:
+So, as you can see in the above example, the expected output is 2.4 but the actual output is 2.4000000000000004. This is because JS uses 64-bit floating point numbers to represent numbers. And 64-bit floating point numbers are not precise. So, to avoid this issue we can use `toFixed([precision_number])` method which returns a `string`. Example:
 ```javascript
 let price = 1.1 + 1.3;
 console.log(price.toFixed(2));
@@ -365,3 +365,73 @@ if (age >= 18) {
     console.log('You are an adult!');
 }
 ```
+
+2. **Truthy & Falsy Values:** In JS, there are values that are considered as true and there are values that are considered as false. Example:
+
+**Falsy Values:** `false`, `0`, `'' or empty string`, `null`, `undefined`, `NaN`.
+
+**Truthy Values:** Everything else other than falsy values like `true`, `1`, `0.5`, `'a'`, `[]`, `{}`, `"0"`etc.
+
+```javascript
+// Tricky examples
+if( 1.1 + 1.3 === 2.4) { // This is falsy
+    console.log('True');
+}
+
+if( (1.1+1.3).toFixed(2) === 2.4) { // This is falsy too because toFixed() returns a string
+    console.log('True');
+}
+
+if( (1.1+1.3).toFixed(2) == 2.4) { // This is truthy because == does type coercion
+    console.log('True');
+}
+
+if( +(1.1+1.3).toFixed(2) === 2.4) { // This is truthy because + converts string to number
+    console.log('True');
+}
+```
+
+3. **If Else Statements:** If else statements are used to execute a block of code if a condition is true and another block of code if the condition is false. Example:
+```javascript
+let age = 18;
+if (age >= 18) {
+    console.log('You are an adult!');
+} else if (age >= 13) {
+    console.log('You are a teenager!');
+} else {
+    console.log('You are a child!');
+}
+```
+
+4. **Switch Statements:** Switch statements are used to execute a block of code based on different cases. Example:
+```javascript
+let role = 'guest';
+switch (role) {
+    case 'guest':
+        console.log('Guest User');
+        break;
+    case 'moderator':
+        console.log('Moderator User');
+        break;
+    default:
+        console.log('Unknown User');
+}
+```
+
+5. **Comparing == and ===:** `==` is used to compare values and `===` is used to compare values and types. Example:
+```javascript
+console.log(1 == 1); // Expected output: true
+console.log(1 == '1'); // Expected output: true
+
+console.log(1 === 1); // Expected output: true
+console.log(1 === '1'); // Expected output: false
+// === is also called scrictly equal to operator.
+```
+
+6. **Ternary Operators:** Ternary operators are used to write if else statements in one line. Example:
+```javascript
+let age = 18;
+let message = (age >= 18) ? 'You are an adult!' : 'You are a child!';
+console.log(message); // Expected output: You are an adult!
+```
+
