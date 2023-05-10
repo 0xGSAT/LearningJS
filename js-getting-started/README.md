@@ -517,3 +517,167 @@ showMessage(); // Expected output: John
 In the below example `key` inside `keyGenerator` function gets oveerwrites the `key` variable defined outside the function. This is called **variable shadowing.**
 <img src="../functionScope.png" alt="Function Scope example" width="500px" height="250px">
 
+
+# Module 08: Objects and DOM
+
+1. **Creating Objects:** Objects are used to represent a collection of related data using properties/attributes and methods/functions. Example:
+```javascript
+let person = {
+    firstName: 'John',
+    lastName: 'Doe',
+    getFullName: function() {
+        return `${this.firstName} ${this.lastName}`;
+    }
+};
+
+console.log(person.firstName); // Expected output: John
+console.log(person['firstName']); // Expected output: John
+console.log(person.getFullName()); // Expected output: John Doe
+console.log(person['getFullName']()); // Expected output: John Doe
+
+console.log(person.age); // Expected output: undefined
+```
+
+2. **Changing Properties:** We can change the value of a property of an object by using dot notation or bracket notation. Example:
+```javascript
+person.firstName = 'Jane';
+console.log(person.firstName); // Expected output: Jane
+
+person['lastName'] = 'Mary';
+console.log(person.lastName); // Expected output: Mary
+```
+
+3. **Adding Properties:** We can add new properties to an object by using dot notation or bracket notation. Example:
+```javascript
+person.age = 27;
+console.log(person.age); // Expected output: 27
+
+person['isStudent'] = true;
+console.log(person.isStudent); // Expected output: true
+```
+
+4. **Using Symbols:** Symbols are used to create unique identifiers for objects. They are used to add properties to an object that won't collide with keys any other code might add to the object, and which are hidden from any mechanisms other code will typically use to access the object. Example:
+```javascript
+
+let symbol = Symbol('age');
+person[symbol] = 27;
+
+console.log(person[symbol]); // Expected output: 27
+console.log(person.age); // Expected output: undefined
+
+console.log(person); // Expected output: {firstName: "John", lastName: "Doe", getFullName: ƒ, Symbol(age): 27}
+```
+
+5. **This Keyword:** `this` keyword is used to refer to the current object. Example:
+```javascript
+let person = {
+    firstName: 'John',
+    lastName: 'Doe',
+    getFullName: function() {
+        return `${this.firstName} ${this.lastName}`;
+    }
+    getFirstName: function() {
+        return firstName;
+    }
+};
+
+console.log(person.getFullName()); // Expected output: John Doe
+console.log(person.getFirstName()); // Expected output: Error firstName is not defined
+```
+
+6. **Passing Objects to Functions:** We can pass objects to functions as parameters. Example:
+```javascript
+let person = {
+    firstName: 'John',
+    lastName: 'Doe',
+    getFullName: function() {
+        return `${this.firstName} ${this.lastName}`;
+    }
+};
+
+function printPerson(person) {
+    console.log(person.getFullName());
+}
+
+printPerson(person); // Expected output: John Doe
+```
+
+7. **Passing By Value vs Passing By Reference:** In JS, primitive types like numbers, strings, booleans are passed by value and objects are passed by reference.
+
+8. **Standard Built-in Objects:** JS provides various built-in objects that we can use to perform various operations. To know more about them go to [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects).
+
+9. **Document Object Model:** DOM is a tree-like structure that represents the HTML document. It is used to manipulate the HTML document. Example:
+```javascript
+console.log(document); // Expected output: HTMLDocument {…}
+console.log(document.body); // Expected output: <body>...</body>
+console.log(document.title); // Expected output: JS Getting Started
+```
+We can use DOM to select elements from the HTML document and manipulate them. MDN has a great documentation on DOM. In simple words, DOM basically provides a way to select elements from the HTML document and manipulate them.[Link](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction)
+
+10. **Selecting Elements:** We can select elements from the HTML document using various methods provided by DOM. Example:
+```javascript
+console.log(document.getElementById('message')); // Expected output: <h1 id="message">Hello World!</h1>
+console.log(document.getElementsByClassName('message')); // Expected output: HTMLCollection [h1#message.message, message: h1#message.message]
+console.log(document.getElementsByTagName('h1')); // Expected output: HTMLCollection [h1#message.message, message: h1#message.message]
+console.log(document.querySelector('#message')); // Expected output: <h1 id="message">Hello World!</h1>
+console.log(document.querySelector('.message')); // Expected output: <h1 id="message">Hello World!</h1>
+console.log(document.querySelector('h1')); // Expected output: <h1 id="message">Hello World!</h1>
+console.log(document.querySelectorAll('h1')); // Expected output: NodeList [h1#message.message]
+```
+
+11. **Styling Elements:** We can style elements using DOM. Example:
+```javascript
+let message = document.getElementById('message');
+message.style.color = 'red';
+message.style.backgroundColor = 'black';
+message.style.fontSize = '50px';
+```
+ In the above example, we selected the element with id `message` and then we changed its color to red, background color to black and font size to 50px.
+
+ *Note*: Some CSS properties have dashes in them, for example `background-color`. In JS, we can't use dashes in variable names so we use camelCase instead. Example:
+ ```javascript
+ message.style.backgroundColor = 'black';
+ ```
+
+12. **Interacting with webpages:** We can interact with webpages using DOM. There are various events that we can listen to and perform actions based on those events. Example:
+ ```javascript
+ let message = document.getElementById('message');
+ message.addEventListener('click', function() {
+    console.log('Clicked!');
+ });
+ ```
+ In the above example, we selected the element with id `message` and then we added an event listener to it. The event listener listens to the click event and then executes the function passed to it.
+
+Some other common event are:
+ - `DOMContentLoaded` event. This event is fired when the HTML document is loaded. Example:
+ ```javascript
+ document.addEventListener('DOMContentLoaded', function() {
+    console.log('DOM Loaded!');
+ });
+ ```
+ - `load` event. This event is fired when the HTML document and all the resources like images, stylesheets, etc are loaded. Example:
+ ```javascript
+ window.addEventListener('load', function() {
+    console.log('Page Loaded!');
+ });
+ ```
+ - `mouseover` event. This event is fired when the mouse is over an element. Example:
+ ```javascript
+ let message = document.getElementById('message');
+ message.addEventListener('mouseover', function() {
+    console.log('Mouse Over!');
+ });
+ ```
+ - `mouseout` event. This event is fired when the mouse is out of an element. Example:
+ ```javascript
+ let message = document.getElementById('message');
+ message.addEventListener('mouseout', function() {
+    console.log('Mouse Out!');
+ });
+ ```
+- `keydown` event. This event is fired when a key is pressed. Example:
+ ```javascript
+ document.addEventListener('keydown', function() {
+    console.log('Key Down!');
+ });
+ ```
