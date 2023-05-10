@@ -435,3 +435,85 @@ let message = (age >= 18) ? 'You are an adult!' : 'You are a child!';
 console.log(message); // Expected output: You are an adult!
 ```
 
+# Module 07: Functions
+
+1. **Function Basics:** Functions are used to group a block of code together and execute it whenever we want. Example:
+```javascript
+function showMessage() {
+    console.log('Hello World!');
+}
+
+showMessage(); // Expected output: Hello World!
+```
+To define a function we use `function` keyword followed by function's name, in this case `showMessage` and then parenthesis. Inside the parenthesis we can pass parameters to the function. After that we use curly braces to define the body of the function. To execute a function we use function's name followed by parenthesis.
+
+
+2. **Function Parameters:** Parameters are used to pass data to a function. Example:
+```javascript
+function showMessage(message) {
+    console.log(message);
+}
+
+showMessage('Hello World!'); // Expected output: Hello World!
+```
+In the above example, `message` is a parameter of the function `showMessage`. When we call the function `showMessage` we pass a value to the parameter `message`.
+Also, if you don't pass a value to the parameter, it will be `undefined` by default. Example:
+```javascript
+function showMessage(message, from) {
+    console.log(message, from);
+}
+
+showMessage('Hello World!'); // Expected output: Hello World! undefined
+```
+
+3. **Function Expressions:** Function expressions are used to assign a function to a variable. Example:
+```javascript
+let showMessage = function() {
+    console.log('Hello World!');
+}
+
+showMessage(); // Expected output: Hello World!
+```
+In the above example, `showMessage` is a variable that holds a function. We can also pass parameters to the function expression. Example:
+```javascript
+let showMessage = function(message) {
+    console.log(message);
+}
+
+showMessage('Hello World!'); // Expected output: Hello World!
+```
+
+**Note:** It is best practice to use function expressions instead of function declarations. Also, it is best practice to give the function a name but you can't use that name, it is good to do it that way because it helps in debugging. Example:
+```javascript
+let printMessage = function showMessage(message) {
+    console.log(message);
+}
+
+printMessage('Hello World!'); // Expected output: Hello World!
+showMessage('Hello World!'); // Expected output: Error showMessage is not defined
+```
+
+4. **Function Return Values:** Functions can also return values using `return` keyword. Example:
+```javascript
+function sum(a, b) {
+    return a + b;
+}
+
+let result = sum(1, 2);
+console.log(result); // Expected output: 3
+```
+
+5. **Function Scope:** Scope is the area where a variable is accessible. Functions have access to all the variables defined in the outer scope. But a variable defined inside a function is not accessible outside the function. Example:
+```javascript
+let name = 'John';
+
+function showMessage() {
+    console.log(name);
+}
+
+showMessage(); // Expected output: John
+```
+
+In the below example `key` inside `keyGenerator` function gets oveerwrites the `key` variable defined outside the function. This is called **variable shadowing.**
+<img src="../functionScope.png" alt="Function Scope example" width="500px" height="250px">
+
