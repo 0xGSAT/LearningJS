@@ -683,3 +683,86 @@ Some other common event are:
  ```
 
 # Module 09: Arrays
+
+1. **Arrays:** Arrays are used to represent a collection of data. Example:
+```javascript
+let num = []; // creating an empty array
+let num = Array(); // creating an empty array
+
+let numbers = Array.of(1, 2, 3, 4, 5); // creating an array with values
+let numbers = [1, 2, 3, 4, 5]; // Creating and initializing an array
+console.log(numbers); // Expected output: [1, 2, 3, 4, 5]
+console.log(numbers[0]); // Expected output: 1
+
+numbers[0] = 10; // Changing the value of an element
+console.log(numbers); // Expected output: [10, 2, 3, 4, 5]
+
+numbers[5] = 6; // Adding a new element
+console.log(numbers); // Expected output: [10, 2, 3, 4, 5, 6]
+
+console.log(number[10]); // Expected output: undefined 
+```
+
+2. **Array Methods:** Arrays have various methods that we can use to manipulate them. Go to MDN to know more about them. [Link](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)
+Some examples are:
+```javascript
+let numbers = [1, 2, 3, 4, 5];
+
+console.log(numbers.length); // Expected output: 5
+console.log(numbers.reverse()); // Expected output: [5, 4, 3, 2, 1]
+console.log(numbers.sort()); // Expected output: [1, 2, 3, 4, 5]
+console.log(numbers.indexOf(3)); // Expected output: 2
+console.log(numbers.indexOf(6)); // Expected output: -1
+console.log(numbers.join('-')); // Expected output: 1-2-3-4-5
+```
+
+3. **Slice and Splice:** Slice and Splice are used to add or remove elements from an array. Slice doesn't change the original array but Splice does. Example:
+```javascript
+let numbers = [1, 2, 3, 4, 5];
+
+console.log(numbers.slice(0, 3)); // Expected output: [1, 2, 3]
+console.log(numbers); // Expected output: [1, 2, 3, 4, 5]
+
+console.log(numbers.splice(0, 3)); // Expected output: [1, 2, 3]
+console.log(numbers); // Expected output: [4, 5]
+
+let numbers = [1, 2, 3, 4, 5];
+numbers.splice(1,1,"a","b","c"); // Here, we are removing 1 element from index 1 and adding 3 elements at index 1. Second argument is the number of elements to remove and the rest of the arguments are the elements to add.
+console.log(numbers); // Expected output: [1, "a", "b", "c", 4, 5]
+```
+
+4. **Manupulating Arrays:** We can use various methods to manipulate arrays. Example:
+```javascript
+let numbers = [1, 2, 3, 4, 5];
+
+let newNumbers = numbers.map(function(value) {
+    return value * 2;
+});
+console.log(newNumbers); // Expected output: [2, 4, 6, 8, 10]
+
+let newNumbers = numbers.filter(function(value) {
+    return value > 3;
+});
+console.log(newNumbers); // Expected output: [4, 5]
+
+let newNumbers = numbers.reduce(function(accumulator, currentValue) {
+    return accumulator + currentValue;
+});
+console.log(newNumbers); // Expected output: 15
+
+let newNumbers = numbers.find(function(value) {
+    return value > 3;
+});
+console.log(newNumbers); // Expected output: 4
+```
+
+5. **Looping Through Arrays:** We can use various methods to loop through arrays. Example:
+```javascript
+let numbers = [1, 2, 3, 4, 5];
+numbers.forEach(function(value) {
+    console.log(value);
+});
+
+
+
+
