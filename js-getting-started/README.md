@@ -1,4 +1,9 @@
-# Notes
+# Notes 
+
+Course: PluralSight: JavaScript Getting Started <br>
+[Course Link](https://app.pluralsight.com/library/courses/javascript-getting-started)
+
+---
 
 # Module 03: Javascript Beginnings
 JavaScript's is mainly used to add functionality and to make changes to the HTML document. 
@@ -53,6 +58,8 @@ In JS, you can comment using:
 
 Comments are ignored by the engine and hence won't generate errors. 
 
+
+---
 
 ## Module 04: Variables and Constants
 
@@ -113,6 +120,8 @@ showMessage(value);
 var value = "Hello World!"
 ```
 
+---
+
 
 # Module 05: Types and Operators
 
@@ -149,7 +158,7 @@ var value = "Hello World!"
     ```
 
 3. **Operator Precedence:** Operator precendence to JS is what BODMAS is to Maths. When in an equation different operators are being used, JS use Operator precedence to calculate the result. [Table by MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Operator_precedence#table).
-<img src="../precedenceTable.png" alt="Precedence Table" width="500px" height="250px">
+<img src="precedenceTable.png" alt="Precedence Table" width="500px" height="250px">
 
 4. **Number Precision:** Number precision is another very common reason of bugs in your JS code. Let's see why, with an example:
 ```javascript
@@ -158,7 +167,7 @@ console.log(price);
 // Expected output: 2.4
 // Actual output: 2.4000000000000004
 ```
-<img src="../numberPrecision.png" alt="Number Precision" width="400px" height="50px">
+<img src="numberPrecision.png" alt="Number Precision" width="400px" height="50px">
 
 So, as you can see in the above example, the expected output is 2.4 but the actual output is 2.4000000000000004. This is because JS uses 64-bit floating point numbers to represent numbers. And 64-bit floating point numbers are not precise. So, to avoid this issue we can use `toFixed([precision_number])` method which returns a `string`. Example:
 ```javascript
@@ -356,6 +365,8 @@ console.log(person[symbol]); // Expected output: 27
 ```
 
 
+---
+
 # Module 06: Program Flow
 
 1. **If Statements:** If statements are used to execute a block of code if a condition is true. Example:
@@ -434,6 +445,9 @@ let age = 18;
 let message = (age >= 18) ? 'You are an adult!' : 'You are a child!';
 console.log(message); // Expected output: You are an adult!
 ```
+
+---
+
 
 # Module 07: Functions
 
@@ -515,7 +529,10 @@ showMessage(); // Expected output: John
 ```
 
 In the below example `key` inside `keyGenerator` function gets oveerwrites the `key` variable defined outside the function. This is called **variable shadowing.**
-<img src="../functionScope.png" alt="Function Scope example" width="500px" height="250px">
+<img src="functionScope.png" alt="Function Scope example" width="500px" height="250px">
+
+
+---
 
 
 # Module 08: Objects and DOM
@@ -682,6 +699,9 @@ Some other common event are:
  });
  ```
 
+---
+
+
 # Module 09: Arrays
 
 1. **Arrays:** Arrays are used to represent a collection of data. Example:
@@ -763,6 +783,9 @@ numbers.forEach(function(value) {
     console.log(value);
 });
 ```
+
+---
+
 
 # Module 10: Scope and Hoisting
 
