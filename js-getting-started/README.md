@@ -762,7 +762,123 @@ let numbers = [1, 2, 3, 4, 5];
 numbers.forEach(function(value) {
     console.log(value);
 });
+```
+
+# Module 10: Scope and Hoisting
+
+1. **Global Scope:** Global scope is the area where a variable is accessible throughout the program. Global scope is **sum of all the scopes/JS files**. It is best practice to avoid using global scope as much as possible. A concept called **polluting global scope** is used to describe the situation where you have a lot of variables in global scope. To avoid we can create one global variable and add all the other variables to it. Example:
+```javascript
+
+let myApp = {
+    name: 'John'
+};
+
+myApp.age = 27;
+myApp.printName = function() {
+    console.log(this.name);
+}
+```
+
+One way to avoid global scope is to use IIFE (Immediately Invoked Function Expression). Example:
+```javascript
+(function() {
+    let name = 'John';
+    console.log(name); // Expected output: John
+})();
+console.log(name); // Expected output: Error name is not defined
+console.log(window.name); // Expected output: undefined
+```
+
+2. **Function Scope:** Function scope is the area where a variable is accessible throughout the function. Example:
+```javascript
+function showMessage() {
+    let message = 'Hello World!';
+
+    function printMessage() {
+        let message = 'Hello World Again!';
+        console.log(message); // Expected output: Hello World Again!
+    }
+
+    console.log(message); // Expected output: Hello World!
+}
+showMessage();
+console.log(message); // Expected output: Error message is not defined
+```
+
+3. **var and Hoiisting:** `var` is used to declare variables. It is best practice to avoid using `var` as much as possible. `var` variables are hoisted to the top of the scope. 
+Hoisting is a JS mechanism where variables and function declarations are moved to the top of their scope before code execution. Example:
+```javascript
+console.log(name); // Expected output: undefined
+var name = 'John';
+console.log(name); // Expected output: John
+```
+The above example is equivalent to:
+```javascript
+var name;
+console.log(name); // Expected output: undefined
+name = 'John';
+console.log(name); // Expected output: John
+```
+This is a problem because we can use a variable before declaring it. To avoid this problem we can use `let` and `const` instead of `var`. Example:
+```javascript
+console.log(name); // Expected output: ReferenceError: Cannot access 'name' before initialization
+let name = 'John';
+console.log(name); // Expected output: John
+```
+
+3.2 **Function Hoisting:** Functions are also hoisted to the top of the scope. Example:
+```javascript
+printMessage(); // Expected output: Hello World!
+function printMessage() {
+    console.log('Hello World!'); // Expected output: Hello World!
+}
+```
+The above example is equivalent to:
+```javascript
+function printMessage() {
+    console.log('Hello World!'); // Expected output: Hello World!
+}
+printMessage(); // Expected output: Hello World!
+```
+**Important!**
+This is because JS engine first scans the code and then executes it. So, when it scans the code it finds the function declaration and hoists it to the top of the scope. But this is not the case with function expressions. Example:
+```javascript
+printMessage(); // Expected output: Error printMessage is not a function
+let printMessage = function() {
+    console.log('Hello World!'); // Expected output: Hello World!
+}
+```
+The above example is equivalent to:
+```javascript
+let printMessage;
+printMessage(); // Expected output: Error printMessage is not a function
+printMessage = function() {
+    console.log('Hello World!'); // Expected output: Hello World!
+}
+```
+
+This is why it is best practice to use function expressions instead of function declarations.
 
 
+4. **Undeclared Variables:** Undeclared variables are variables that are not declared using `var`, `let` or `const`. Example:
+```javascript
+name = 'John';
+console.log(name); // Expected output: John
+```
+The above example is equivalent to:
+```javascript
+var name;
+name = 'John';
+console.log(name); // Expected output: John
+```
 
+This a problem because we can use a variable without declaring it. To avoid this problem we can use `let` and `const` instead of `var`.
 
+5. **Window Object** Window object is the global object in the browser. It represents the browser window. In the browser, all global variables and functions are properties and methods of the window object. Even in the above example, `name` is a property of the window object.
+
+6. **Strict Mode:** Developers didn't want to `window` to be used as a dumpin ground for all the global variables and functions so they introduced a concept called **strict mode**. In strict mode, if you try to use a variable without declaring it, it will throw an error. Example:
+```javascript
+'use strict';
+name = 'John';
+console.log(name); // Expected output: Error name is not defined
+```
