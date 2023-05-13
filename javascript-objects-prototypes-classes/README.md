@@ -130,3 +130,128 @@ Course: JavaScript Objects, Prototypes, and Classes
     display(keys); // ["name", "age", "partTime", "showInfo"]
     ```
 
+6.  **Object Equality:** There are 3 ways to compare
+ - `==`: Double equals, this should be avoided as much as possible and is useful only in rare cases like when you want to compare an input string value to a numericaal value e.g. "100" == 100, that is it.
+ - `===`: Triple equals, this should be used almost all the time.
+ - `Object.is(object1, object2)`: Less common, very much similar to `===` except for following mathematical differences.
+ 
+ Difference between `===` & `Object.is()`:
+  - In `===` NaN is not equal to NaN but in `Object.is()` they are equal.
+  - In `===` +0 is equal to -0 but in  `Object.is()` they are **not** equal.
+
+ **Note:** Two objects are only equal if the both point to same memory address. 
+ <img src="ObjectNotEqual.png" alt="Example of 2 not equal Objects" width="500px" height="250px">
+
+ <img src="ObjectEqual.png" alt="Example of 2 equal Objects" width="500px" height="250px">
+
+
+7. **Object Methods:** 
+ - `Object.assign([target Object], [source obj1], [source obj2]...)`: This method is used to copy the properties from one object to another. It takes two arguments, the target object and the source object. It copies the properties from the source object to the target object. It returns the target object.
+    ```javascript
+    const target = {};
+    const source = {firstName: 'John', lastName: 'Doe'};
+    Object.assign(target, source);
+    display(target); // {firstName: "John", lastName: "Doe"}
+    ```
+    **Note:** If the target object already has a property with the same name, it will be overwritten. If you want to copy the properties from multiple source objects, you can pass more than two arguments to the Object.assign() method.
+    ```javascript
+    const target = {};
+    const source1 = {firstName: 'John'};
+    const source2 = {lastName: 'Doe'};
+    Object.assign(target, source1, source2);
+    display(target); // {firstName: "John", lastName: "Doe"}
+    ```
+    **Important:** The Object.assign() method only copies the properties from the source object to the target object. It doesn't create a link between the two objects. If you change the source object, the changes won't be reflected in the target object.
+    ```javascript
+    const target = {};
+    const source = {firstName: 'John', lastName: 'Doe'};
+    Object.assign(target, source);
+    source.firstName = 'Jane';
+    display(target); // {firstName: "John", lastName: "Doe"}
+    ```
+    **Note:** If you use `===` on the target and source objects, you will see that they are not equal. This is because they are two different objects. They just happen to have the same properties.
+
+    Another great use of Object.assign() is when we want to merge two object's properties for example:
+    ```javascript
+    let patient = {
+        name: 'John',
+        age: 23
+    };
+
+    let healthStats = {
+        height: 180,
+        weight: 80
+    };
+    
+    Object.assign(patient, healthStats);
+    display(patient); // {name: "John", age: 23, height: 180, weight: 80}
+    ```
+    
+    Now, one possible issue with this approach is that it modifies the original object. If you don't want to modify the original object, you can pass an empty object as the first argument to the Object.assign() method. This will create a new object and copy the properties from the source objects to it.
+
+    ```javascript
+    let newPatient = Object.assign({}, patient, healthStats);
+    // {} is target object, patient is source object, healthStats is source object
+    display(newPatient); // {name: "John", age: 23, height: 180, weight: 80}
+    display(patient); // {name: "John", age: 23}
+    ```
+
+ **Good Immutability practice says:** A function should **not** modify the original object. It should create a new object and copy the properties from the original object to it. This is called immutability. It is a good practice to follow. It makes your code easier to reason about. It also helps you avoid bugs.
+
+ - `Object.freeze(object)`: This method is used to freeze an object. A frozen object can't be modified. It is immutable. It takes an object as an argument and returns the frozen object.
+    ```javascript
+    const person = {
+        name: 'John',
+        age: 32
+    };
+    Object.freeze(person);
+    person.age = 40;
+    display(person); // {name: "John", age: 32}
+    ```
+    **Note:** The Object.freeze() method only freezes the object at the top level. It doesn't freeze the objects inside it. If you want to freeze the objects inside it, you have to call the Object.freeze() method on them.
+    ```javascript
+    const person = {
+        name: 'John',
+        age: 32,
+        address: {
+            city: 'New York'
+        }
+    };
+    Object.freeze(person);
+    person.address.city = 'Chicago';
+    display(person); // {name: "John", age: 32, address: {city: "Chicago"}}
+    ```
+
+ - `Object.create()`: **Not common** This method is used to create a new object. It takes an object as an argument and returns a new object that inherits from the object that was passed to it.
+    ```javascript
+    const person = {
+        name: 'John',
+        age: 32
+    };
+    const newPerson = Object.create(person);
+    display(newPerson); // {}
+    display(newPerson.__proto__); // {name: "John", age: 32}
+    ```
+    **Note:** The newPerson object doesn't have any properties. It inherits the properties from the person object. You can access the prototype of an object using the __proto__ property. This property is not part of the standard. It is a non-standard property. It is supported by all major browsers. It is also supported by Node.js.
+
+    **Important:** The Object.create() method is useful when you want to create an object that inherits from another object. This is called prototypal inheritance. It is a powerful feature of JavaScript. It allows you to create objects that inherit from other objects. This is a very flexible way to create objects. It is also a very efficient way to create objects. You can create multiple objects that inherit from the same object. This allows you to reuse the properties and methods of the parent object.
+
+
+8. **Less Dynamic, More Static Objects:** In JS, to have objects that are static similar to what we see in other statically-typed languages like Java. We can achieve that in two ways:
+ - **Constructor Functions:** We can use constructor functions to create objects. This is the most common way to create objects in JS. It is also the most flexible way to create objects. You can create objects with different properties and different methods. This is because the constructor function is a regular function. You can pass arguments to it. You can also use the this keyword inside it. This allows you to create objects with different properties and methods.
+    ```javascript
+    function Person(name, age) {
+        this.name = name;
+        this.age = age;
+        this.showInfo = function() {
+            display(`${this.name} is ${this.age}`);
+        };
+    }
+    const john = new Person('John', 32);
+    const jane = new Person('Jane', 28);
+    john.showInfo(); // John is 32
+    jane.showInfo(); // Jane is 28
+    ```
+    **Note:** The constructor function is a regular function. You can call it without the new keyword. If you do that, the `this` parameter will be set to the global object (window in the browser). This can lead to unexpected results.
+
+    **Good Practice:** It is a good practice to name constructor functions with an uppercase first letter. This makes it easier to identify them.
