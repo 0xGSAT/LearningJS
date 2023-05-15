@@ -255,3 +255,113 @@ Course: JavaScript Objects, Prototypes, and Classes
     **Note:** The constructor function is a regular function. You can call it without the new keyword. If you do that, the `this` parameter will be set to the global object (window in the browser). This can lead to unexpected results.
 
     **Good Practice:** It is a good practice to name constructor functions with an uppercase first letter. This makes it easier to identify them.
+
+
+    - **Classes:** We can use classes to create objects. This is the new way to create objects in JS. It is also the most flexible way to create objects. You can create objects with different properties and different methods. This is because the class is a template. You can pass arguments to it. You can also use the this keyword inside it. This allows you to create objects with different properties and methods.
+        ```javascript
+        class Person {
+            constructor(name, age) {
+                this.name = name;
+                this.age = age;
+            }
+            showInfo() {
+                display(`${this.name} is ${this.age}`);
+            }
+        }
+        const john = new Person('John', 32);
+        const jane = new Person('Jane', 28);
+        john.showInfo(); // John is 32
+        jane.showInfo(); // Jane is 28
+        ```
+
+
+# Module 03: Javascript object properties
+
+1. **Bracket Notation:** Bracket notations are a great way to access an objects properties. It is useful when you want to access a property using a variable or if you want to define a property name that is not a valid identifier like `hair color` with sapce in between. For example:
+    ```javascript
+    const person = {
+        name: 'John',
+        age: 32
+    };
+    const propertyName = 'name';
+    display(person[propertyName]); // John
+
+    person['hair color'] = 'brown';
+    display(person['hair color']); // brown
+    ```
+    **Note:** The bracket notation is useful when you want to access a property using a variable. You can't use the dot notation in this case. If you do that, the JavaScript engine will look for a property with the name propertyName instead of the name property.
+
+2. **Property Descriptor:** `Object.getOwnPropertyDiscriptor([object], [propertyName])` method is used to get the property descriptor of a property. It takes two arguments, the object and the property name. It returns the property descriptor of the property. The property descriptor is an object that contains the following properties:
+    - **configurable:** This property specifies whether the property can be deleted and whether its attributes can be changed.
+    - **enumerable:** This property specifies whether the property can be returned in a for...in loop.
+    - **value:** This property specifies the value of the property.
+    - **writable:** This property specifies whether the property can be changed.
+    - **get:** This property specifies the getter function for a property.
+    - **set:** This property specifies the setter function for a property.
+    ```javascript
+    const person = {
+        name: 'John',
+        age: 32
+    };
+    const descriptor = Object.getOwnPropertyDescriptor(person, 'name');
+    display(descriptor);
+    /*
+    {
+        configurable: true,
+        enumerable: true,
+        value: "John",
+        writable: true
+    }
+    */
+    ```
+    **Note:** The Object.getOwnPropertyDescriptor() method only returns the property descriptor of own properties. It doesn't return the property descriptor of inherited properties. If you want to get the property descriptor of inherited properties, you have to use the `Object.getPrototypeOf()` method to get the prototype of the object and then use the Object.getOwnPropertyDescriptor() method to get the property descriptor of the property.
+    ```javascript
+    const prototype = Object.getPrototypeOf(person);
+    const descriptor = Object.getOwnPropertyDescriptor(prototype, 'toString');
+    display(descriptor);
+    /*
+    {
+        configurable: true,
+        enumerable: false,
+        value: ƒ toString(),
+        writable: true
+    }
+    */
+    ```
+
+ 3. **Object.defineProperty([object], [propertyName],{attributes of property to be modified}):** This method is used to modify the attributes of a property. It takes three arguments, the object, the property name, and an object that contains the attributes of the property. It returns the object that was passed to it.
+    ```javascript
+    const person = {
+        name: 'John',
+        age: 32
+    };
+    Object.defineProperty(person, 'name', {writable: false});
+    person.name = 'Jane';
+    display(person.name); // John
+    ```
+    **Note:** The Object.defineProperty() method only modifies the attributes of own properties. It doesn't modify the attributes of inherited properties. If you want to modify the attributes of inherited properties, you have to use the Object.getPrototypeOf() method to get the prototype of the object and then use the Object.defineProperty() method to modify the attributes of the property.
+    ```javascript
+    const prototype = Object.getPrototypeOf(person);
+    Object.defineProperty(prototype, 'toString', {enumerable: false});
+    for (let key in person) {
+        display(key); // name, age
+    }
+    ```
+ 4. **Getter and Setter:** Getters and setters are special methods that are used to get and set the values of an object's properties. They are useful when you want to do something special when a property is accessed or changed. For example, you can use them to validate the values of a property. For example:
+ ```javascript
+    const person = {
+        name: 'John',
+        age: 32,
+        get birthYear() {
+            return new Date().getFullYear() - this.age;
+        },
+        set birthYear(value) {
+            this.age = new Date().getFullYear() - value;
+        }
+    };
+    display(person.birthYear); // 1987
+    person.birthYear = 1985;
+    display(person.birthYear); // 1985
+    display(person.age); // 34
+    ```
+
