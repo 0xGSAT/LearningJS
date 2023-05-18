@@ -363,5 +363,62 @@ Course: JavaScript Objects, Prototypes, and Classes
     person.birthYear = 1985;
     display(person.birthYear); // 1985
     display(person.age); // 34
+ ```
+
+
+# Module 04: Javascript prototypes and interfaces
+
+ 1. **Prototype:** A prototype is a template that is used to make functions (function prototype) or create other objects.
+ `Object Prototype`: An object Prototype is the object instance from whih the object is inherited. It contains common properties and methods that are available to all objects that inherit from it. For example, all objects inherit from the Object prototype. This means that all objects have the toString() method. You can call it on any object.
+    ```javascript
+    const person = {
+        name: 'John',
+        age: 32,
+        showInfo: function() {
+            display(`${this.name} is ${this.age}`);
+        }
+    };
+    person.toString(); // [object Object]
+    console.log(person.__proto__); // {constructor: ƒ, toString: ƒ}
     ```
 
+ `Function Prototype`: The functions prototype is the object instance that will become the prototype for all objects created using this function as a constructor.
+    ```javascript
+    let myFunc = function() {
+        display('Hello');
+    };
+    myFunc.call(); // Hello
+    console.log(myFunc.prototype); // {constructor: ƒ}
+    ```
+  
+    
+    **Note:** The toString() method returns a string representation of an object. The default implementation returns [object Object]. You can override this method to return a custom string representation of an object.
+
+    **Important:** The Object prototype is the root of the prototype chain. All objects inherit from it. It is the only object that doesn't have a prototype. The prototype of an object is the object that it inherits from. You can access the prototype of an object using the Object.getPrototypeOf() method.
+    ```javascript
+    const prototype = Object.getPrototypeOf(person);
+    display(prototype); // {constructor: ƒ, toString: ƒ}
+    ```
+    **Note:** The prototype of an object is the object that it inherits from. You can access the prototype of an object using the Object.getPrototypeOf() method.
+
+    `Object.keys()` method returns an array of the object's own properties. It doesn't include the properties that are inherited from the prototype chain.
+    ```javascript
+    const keys = Object.keys(person);
+    display(keys); // ["name", "age", "showInfo"]
+    ```
+
+
+
+    **Important:** Methods like getters and setters live on class' prototype. They are not copied to the objects created using the class. This is because they are not part of the object's own properties. They are part of the class' prototype. They are inherited by the objects created using the class. Whereas, the properties that are defined inside the constructor function are copied to the objects created using the constructor function. This is because they are part of the object's own properties. They are not inherited by the objects created using the constructor function. 
+ 
+ <u>Look at the two JS files in same directory for constructor functions and classes.</u>
+
+
+# Module 05: Using Built-in JS Objects
+
+There are many good-to-know and commonly used JS Global Objects like [Math](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math), [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) and [Regex](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp) etc.
+You can go to the MDN link and learn more!
+
+**Note:** JS Date constructor is somehow crazy! If you look at the below example it should say March but it says April. This is because JS Date constructor starts counting months from 0. So, 0 is January, 1 is February and so on. Rest all start from 0.
+
+<img src="DateBadImplementation.png" alt="JS Date example" width="500px" height="250px">
