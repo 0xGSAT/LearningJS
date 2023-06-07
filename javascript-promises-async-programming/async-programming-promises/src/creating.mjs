@@ -47,6 +47,8 @@ export function allPromises(){
         .catch((reason) => {
             setText(reason);
         });
+
+    console.log("Hello");
 }
 
 export function allSettled(){
@@ -78,6 +80,7 @@ export function allSettled(){
         .catch((reason) => {
             setText(reason);
         });
+    console.log("Hello");
 }
 
 export function race(){ 
