@@ -25,4 +25,12 @@ export function concurrent(){
 }
 
 export function parallel(){
+
+    await Promise.all([ 
+        (async () => {
+
+        }) () (), (async () => {
+
+        })
+     ])
 }

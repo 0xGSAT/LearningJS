@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Classes Demo</title>
+    
+    
+        
+</head>
+
+<body>
+    <script>
+        let num1 = 100;
+        let num2 = 100;
+        try {
+            if (isNaN(num1) || isNaN(num2)) {
+                throw "Not a number"
+            }
+            else {
+                if (num2 == 0) {
+                    throw "Divide by zero error";
+                }
+                else {
+                    let result = num1 / num2;
+                    console.log("Result: " + result);
+                }
+            }
+        }
+        catch (e) {
+            console.log("Error: " + e);
+            console.log("Some error occured");
+        }
+        finally {
+            console.log("Code execution completed");
+        }
+    </script>
+</body>
+
+</html>

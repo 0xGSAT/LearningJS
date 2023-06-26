@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Booking Details</title>
+    <style>
+        div#maincontent {
+            height: 100px;
+            width: 500px;
+            border: 1px solid #CEE2FA;
+            text-align: left;
+            color: #08438E;
+            font-family: calibri;
+            font-size: 20;
+            padding: 5px;
+            margin-left: 10px;
+        }
+        div#heading {
+            text-decoration: bold;
+            text-align: center;
+            margin-top: 40px;
+            margin-left: 10px;
+            width: 500px;
+            border: 1px solid #CEE2FA;
+            text-align: center;
+            color: #08438E;
+            background-color: #CEE2FA;
+            font-family: calibri;
+            font-size: 20;
+            padding: 5px;
+        }
+        h2 {
+            padding: 0;
+            margin: 0;
+        }
+    </style>
+</head>
+ 
+<body>
+    <div id="heading">
+          <h2>Booking Summary</h2>
+    </div>
+    <div id="maincontent">
+        <script>
+            //Write the code to display the discounted price on click of the text
+            let seats = prompt("How many tickets?");
+            let cost = 0;
+            try{
+                if(seats <= 0){
+                    throw "Invalid number of seats";
+                }
+                else if(seats <= 2){
+                    cost = seats * 9;
+                }
+                else if(seats <= 5){
+                    let disc = [0.95,0.93,0.91, 0.89, 0.87];
+                    for(i = 0; i < seats; i++){
+                        cost += 9 * disc[i];
+                    }
+                } else {
+                    throw "No more then 5 tickets can be booked"
+                }
+            } 
+            catch(e){
+                document.write("Error: " + e + "<br>");
+            } 
+            finally {
+                document.write("Cost per ticket: $" + 9 + "<br>");
+                document.write("Total cost: $" + 9*seats + "<br>");
+
+                if(seats > 2 && seats <= 5){
+                    document.write(`Discount:  <a onclick='alert("Discounted price: "+cost)' > apply </a> %<br>`);
+                }
+            }
+        </script>
+    </div>
+</body>
+ 
+</html>
+
+/*
+let personalDetails = {
+    name: "Stian Kirkeberg",
+    country: "Norway"    
+};
+let dynamicProperty = "age";
+personalDetails[dynamicProperty] = 45;
+
+console.log(personalDetails.age);  //Output: 45
+console.log(personalDetails[dynamicProperty]);  //Output: 45
+console.log(personalDetails["age"]);  //Output: 45
+
+console.log(personalDetails["First Name"]);  //Output: 45
+
+
+
+let personalDetails = {
+    name: "Stian Kirkeberg",
+    country: "Norway",
+    age: 45  
+};
+
+let { name, age:currentAge } = myObject; //alias can be used with : 
+let name = myObject.name;
+let currentAge = myObject.age;
+
+
+let myObject = { name: 'Marty', age: 65, country: 'California' }; 
+function showDetails({ country }) { 
+    console.log(country); 
+} 
+showDetails(myObject);
+
+showDetails({ country: 'California' }); //Output: California
+*/

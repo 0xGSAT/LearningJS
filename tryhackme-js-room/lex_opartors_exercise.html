@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ticket Details</title>
+    <style>
+        div#maincontent {
+            height: 150px;
+            width: 500px;
+            border: 1px solid #CEE2FA;
+            text-align: left;
+            color: #08438E;
+            font-family: calibri;
+            font-size: 20;
+            padding: 5px;
+        }
+        div#heading {
+            text-decoration: bold;
+            text-align: center;
+            margin-top: 80px;
+            width: 500px;
+            border: 1px solid #CEE2FA;
+            text-align: center;
+            color: #08438E;
+            background-color: #CEE2FA;
+            font-family: calibri;
+            font-size: 20;
+            padding: 5px;
+        }
+        h4 {
+            padding: 0;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <center>
+        <div id="heading">
+            <b>Theatre Drama</b>
+        </div>
+        <div id="maincontent">
+            <h4>Your Ticket Details:</h4>
+            <br>
+            <script>
+                //Write the code to calculate the total price and discounted price for the tickets
+                // let tickets = 3;
+                // let discount = 10;
+                // document.write(`Total number of seats booked: ${tickets} <br/>`);
+                // document.write(`Total cost of ${tickets} tickets: ${tickets*9} <br/>`);
+                // document.write(`Festive season discount is: ${discount}% <br/>`);
+                // document.write(`Total cost after discount is: $${tickets*9 - (discount*tickets*9)/100} <br/>`);
+
+
+let choice = 1;
+let tempFahrenheit = 104;
+const THIRTYTWO = 32;
+const TEMP = 1.8;
+const NORMAL_CELSIUS = 37;
+let result1 = tempFahrenheit - THIRTYTWO;
+let result2 = result1 / TEMP; // My body temp in Cel
+
+switch (choice) {
+	case 1:
+		document.write("Your body temperature in Celsius is: " + result2 + "<br>");
+		result2 > NORMAL_CELSIUS ? document.write("You have fever, take rest!")
+			: document.write("You are absolutely OK!! Enjoy");
+		break;
+	case 2:
+		document.write("No, I don't want to check whether i have fever or not<br>");
+		break;
+	default:
+		document.write("Sorry wrong choice provided<br>");
+}
+
+            </script>
+        </div>
+    </center>
+</body>
+</html>

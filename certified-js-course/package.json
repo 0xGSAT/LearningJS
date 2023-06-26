@@ -1,0 +1,14 @@
+{
+  "name": "certified-js-course",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm run test"
+  },
+  "author": "0xgsat",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^8.42.0"
+  }
+}
